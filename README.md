@@ -45,7 +45,7 @@ learning and retrieval-based question answering.
 ## Project Structure
 
 ```
-NLP_project/
+NLP_PROJECT/
 ├── streamlit_app.py        ← entire application (single Python file)
 ├── requirements.txt        ← all Python dependencies
 ├── README.md               ← this file
@@ -57,12 +57,27 @@ NLP_project/
 
 ---
 
-## How to Run — Option A: Clone from GitHub (Recommended)
+## How to Run — Option A: Using Git (Recommended)
 
+> Use this if you have **Git installed** on your computer.
+
+**Step 1 — Clone the repository** (this downloads everything automatically):
 ```bash
 git clone https://github.com/chanumolulalith/NLP_PROJECT.git
+```
+
+**Step 2 — Go into the project folder:**
+```bash
 cd NLP_PROJECT
+```
+
+**Step 3 — Install dependencies:**
+```bash
 pip install -r requirements.txt
+```
+
+**Step 4 — Launch the app:**
+```bash
 python -m streamlit run streamlit_app.py
 ```
 
@@ -70,58 +85,51 @@ The app opens automatically at **http://localhost:8501**
 
 ---
 
-## How to Run — Option B: From a downloaded folder
+## How to Run — Option B: Download ZIP from GitHub (No Git needed)
 
-### Step 1 — Open a terminal inside the project folder
+> Use this if you do **not** have Git installed.
 
-**Windows:**
+**Step 1 — Download the project as a ZIP file:**
+
+1. Go to **https://github.com/chanumolulalith/NLP_PROJECT**
+2. Click the green **"Code"** button
+3. Click **"Download ZIP"**
+4. Save the ZIP file to your computer (e.g. Desktop)
+
+**Step 2 — Extract the ZIP:**
+
+- **Windows:** Right-click the ZIP file → **"Extract All"** → choose a folder → click Extract
+- **macOS:** Double-click the ZIP file — it extracts automatically
+
+**Step 3 — Open a terminal inside the extracted folder:**
+
+- **Windows:** Open the extracted folder → click the address bar at the top → type `cmd` → press Enter
+- **macOS:** Right-click the extracted folder → **"New Terminal at Folder"**
+
+Or navigate manually:
+
 ```
-cd C:\path\to\NLP_project
+# Windows
+cd C:\Users\YourName\Desktop\NLP_PROJECT-main
+
+# macOS / Linux
+cd /Users/YourName/Desktop/NLP_PROJECT-main
 ```
 
-**macOS / Linux:**
-```bash
-cd /path/to/NLP_project
-```
+> **Note:** The extracted folder is usually named `NLP_PROJECT-main` (GitHub adds `-main` automatically).
 
----
-
-### Step 2 — Create a virtual environment (recommended)
-
-**Windows:**
-```
-python -m venv .venv
-.venv\Scripts\activate
-```
-
-**macOS / Linux:**
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
----
-
-### Step 3 — Install all dependencies
-
+**Step 4 — Install dependencies:**
 ```
 pip install -r requirements.txt
 ```
 
-> **Note:** If `tensorflow` fails to install (requires Python 3.9 – 3.12),
-> the app still runs completely — the Deep Learning tab will show a friendly
-> message and all other 5 tabs work normally.
-
----
-
-### Step 4 — Launch the app
-
+**Step 5 — Launch the app:**
 ```
 python -m streamlit run streamlit_app.py
 ```
 
-The browser opens automatically at **http://localhost:8501**
-If it does not open, copy and paste the URL manually.
+The app opens automatically at **http://localhost:8501**
+If it does not open, copy and paste the URL manually into your browser.
 
 ---
 
@@ -157,11 +165,12 @@ Then open **http://localhost:6006** in your browser.
 |---------|----------|--------|
 | streamlit, pandas, scikit-learn | Python 3.8+ | Always works |
 | textblob, transformers | Python 3.8+ | Always works |
-| gensim | Python 3.8+ (needs C++ build tools) | sklearn fallback built-in |
-| tensorflow | Python 3.9 – 3.12 only | Deep learning tab skipped on 3.13+ |
+| gensim | Python 3.8+ (needs C++ build tools) | sklearn fallback built-in — not required |
+| tensorflow | Python 3.9 – 3.12 only | Deep learning tab skipped on Python 3.13+ |
 
 > The app was built and tested on **Python 3.14**. All features except
-> TensorFlow work out of the box.
+> TensorFlow work out of the box. `pip install -r requirements.txt` installs
+> only compatible packages and completes without errors on any Python version.
 
 ---
 
