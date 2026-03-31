@@ -1,3 +1,4 @@
+# ── Core requirements (always install these) ──────────────────────────────
 streamlit
 pandas
 numpy
@@ -5,19 +6,21 @@ matplotlib
 scikit-learn
 openpyxl
 
-# Optional bonus modules (auto-detected if installed)
-# textblob: spell correction and sentiment helpers
+# ── Spell correction and basic NLP helpers ─────────────────────────────────
 textblob
 
-# gensim: Word2Vec (requires C++ build tools to compile)
-# If gensim cannot be installed, the app uses a built-in sklearn fallback for Word2Vec
-gensim
-
-# transformers: zero-shot subject classification via HuggingFace
+# ── Zero-shot classification and extractive QA (HuggingFace) ──────────────
 transformers
-
-# tensorflow: deep-learning tab (requires Python <= 3.12; not available on Python 3.13+)
-# tensorflow
-
-# sentencepiece: tokenizer for some HuggingFace models
 sentencepiece
+
+# ── Optional: gensim for true Word2Vec ────────────────────────────────────
+# gensim requires C++ build tools to compile and does NOT support Python 3.13+
+# The app has a built-in sklearn fallback — Word2Vec works WITHOUT gensim.
+# Only uncomment if you are on Python 3.9 – 3.12 and have Visual C++ installed.
+# gensim
+
+# ── Optional: TensorFlow for the Deep Learning tab ────────────────────────
+# TensorFlow only supports Python 3.9 – 3.12.
+# The app runs fully without it — the Deep Learning tab shows a friendly message.
+# Only uncomment if you are on Python 3.9 – 3.12.
+# tensorflow
