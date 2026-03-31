@@ -61,27 +61,47 @@ NLP_PROJECT/
 
 > Use this if you have **Git installed** on your computer.
 
-**Step 1 — Clone the repository** (this downloads everything automatically):
+Open a terminal (Command Prompt on Windows, Terminal on Mac) and run these commands **one by one**:
+
 ```bash
+# 1. Download the project (creates a folder called NLP_PROJECT)
 git clone https://github.com/chanumolulalith/NLP_PROJECT.git
-```
 
-**Step 2 — Go into the project folder:**
-```bash
+# 2. GO INSIDE the downloaded folder  ← very important, do not skip this!
 cd NLP_PROJECT
-```
 
-**Step 3 — Install dependencies:**
-```bash
+# 3. Install all required packages
 pip install -r requirements.txt
-```
 
-**Step 4 — Launch the app:**
-```bash
+# 4. Start the app
 python -m streamlit run streamlit_app.py
 ```
 
+> **Common mistake:** Running `pip install -r requirements.txt` before doing `cd NLP_PROJECT`
+> will give the error *"No such file or directory: requirements.txt"*.
+> Always `cd NLP_PROJECT` first.
+
 The app opens automatically at **http://localhost:8501**
+
+---
+
+### Quick copy-paste for Mac / Linux:
+
+```bash
+git clone https://github.com/chanumolulalith/NLP_PROJECT.git
+cd NLP_PROJECT
+pip3 install -r requirements.txt
+python3 -m streamlit run streamlit_app.py
+```
+
+### Quick copy-paste for Windows:
+
+```
+git clone https://github.com/chanumolulalith/NLP_PROJECT.git
+cd NLP_PROJECT
+pip install -r requirements.txt
+python -m streamlit run streamlit_app.py
+```
 
 ---
 
@@ -89,43 +109,55 @@ The app opens automatically at **http://localhost:8501**
 
 > Use this if you do **not** have Git installed.
 
-**Step 1 — Download the project as a ZIP file:**
+**Step 1 — Download the ZIP:**
 
 1. Go to **https://github.com/chanumolulalith/NLP_PROJECT**
 2. Click the green **"Code"** button
 3. Click **"Download ZIP"**
-4. Save the ZIP file to your computer (e.g. Desktop)
+4. Save it to your Desktop
 
 **Step 2 — Extract the ZIP:**
 
-- **Windows:** Right-click the ZIP file → **"Extract All"** → choose a folder → click Extract
-- **macOS:** Double-click the ZIP file — it extracts automatically
+- **Windows:** Right-click the ZIP → **"Extract All"** → Extract
+- **macOS:** Double-click the ZIP — it extracts automatically into a folder called `NLP_PROJECT-main`
 
-**Step 3 — Open a terminal inside the extracted folder:**
+> The extracted folder is called **`NLP_PROJECT-main`** (GitHub adds `-main` to the name).
 
-- **Windows:** Open the extracted folder → click the address bar at the top → type `cmd` → press Enter
-- **macOS:** Right-click the extracted folder → **"New Terminal at Folder"**
+**Step 3 — Open a terminal INSIDE the extracted folder:**
 
-Or navigate manually:
+- **Windows:** Open the `NLP_PROJECT-main` folder → click the address bar at the top → type `cmd` → press Enter
+- **macOS:** Right-click the `NLP_PROJECT-main` folder → **"New Terminal at Folder"**
 
-```
+**Step 4 — Confirm you are in the right folder** (you should see `requirements.txt` listed):
+
+```bash
 # Windows
-cd C:\Users\YourName\Desktop\NLP_PROJECT-main
+dir
 
 # macOS / Linux
-cd /Users/YourName/Desktop/NLP_PROJECT-main
+ls
 ```
 
-> **Note:** The extracted folder is usually named `NLP_PROJECT-main` (GitHub adds `-main` automatically).
+You should see: `streamlit_app.py`, `requirements.txt`, `README.md`, `data/`
 
-**Step 4 — Install dependencies:**
-```
+**Step 5 — Install dependencies:**
+
+```bash
+# Windows
 pip install -r requirements.txt
+
+# macOS / Linux
+pip3 install -r requirements.txt
 ```
 
-**Step 5 — Launch the app:**
-```
+**Step 6 — Launch the app:**
+
+```bash
+# Windows
 python -m streamlit run streamlit_app.py
+
+# macOS / Linux
+python3 -m streamlit run streamlit_app.py
 ```
 
 The app opens automatically at **http://localhost:8501**
