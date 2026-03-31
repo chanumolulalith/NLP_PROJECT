@@ -1,0 +1,23 @@
+streamlit
+pandas
+numpy
+matplotlib
+scikit-learn
+openpyxl
+
+# Optional bonus modules (auto-detected if installed)
+# textblob: spell correction and sentiment helpers
+textblob
+
+# gensim: Word2Vec (requires C++ build tools to compile)
+# If gensim cannot be installed, the app uses a built-in sklearn fallback for Word2Vec
+gensim
+
+# transformers: zero-shot subject classification via HuggingFace
+transformers
+
+# tensorflow: deep-learning tab (requires Python <= 3.12; not available on Python 3.13+)
+# tensorflow
+
+# sentencepiece: tokenizer for some HuggingFace models
+sentencepiece
