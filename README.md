@@ -1,8 +1,44 @@
-# NLP Project 2 – Insurance Review Analysis (Streamlit App)
+# NLP Project 2 – Insurance Customer Review Analysis
 
-An interactive NLP workspace built with Streamlit that performs text cleaning,
-topic modeling, supervised classification, deep learning, and information
-retrieval on French insurance customer reviews.
+An interactive Natural Language Processing application built with **Streamlit** that
+analyses **24,093 French insurance customer reviews** from **56 insurance companies**.
+The app covers the full NLP pipeline — from raw data cleaning all the way to deep
+learning and retrieval-based question answering.
+
+---
+
+## About the Dataset
+
+| Property | Value |
+|----------|-------|
+| Source files | 35 Excel (.xlsx) files in the `data/` folder |
+| Total reviews | 24,093 (after cleaning and deduplication) |
+| Language | French (with English translations provided) |
+| Insurance companies | 56 unique insurers |
+| Star ratings | 1 to 5 stars |
+| Columns used | `note`, `auteur`, `avis`, `assureur`, `produit`, `avis_en` |
+
+---
+
+## Features Implemented
+
+| # | Feature | Method |
+|---|---------|--------|
+| 1 | Data cleaning & normalization | Regex, stop-word removal, accent stripping |
+| 2 | Spell correction | TextBlob `.correct()` |
+| 3 | N-gram frequency analysis | CountVectorizer |
+| 4 | Topic modeling | NMF (Non-negative Matrix Factorization) |
+| 5 | Word embeddings | Word2Vec (gensim) + LSA fallback |
+| 6 | Embedding visualization | t-SNE 2D projection |
+| 7 | Star rating prediction | TF-IDF + Logistic Regression / Naïve Bayes |
+| 8 | Sentiment classification | positive / neutral / negative (~80% accuracy) |
+| 9 | Subject classification | 6 categories (Pricing, Coverage, Claims…) |
+| 10 | Prediction explanation | Logistic coefficient × TF-IDF term scores |
+| 11 | Semantic search | TF-IDF cosine similarity |
+| 12 | Question Answering | DistilBERT extractive QA + keyword fallback |
+| 13 | Zero-shot classification | BART-large-MNLI (HuggingFace Transformers) |
+| 14 | Insurer analytics | Pivot tables, averages, subject heatmap |
+| 15 | Deep learning | Keras embedding model + TensorBoard export |
 
 ---
 
@@ -10,10 +46,10 @@ retrieval on French insurance customer reviews.
 
 ```
 NLP_project/
-├── streamlit_app.py        ← main application (single file)
-├── requirements.txt        ← Python dependencies
+├── streamlit_app.py        ← entire application (single Python file)
+├── requirements.txt        ← all Python dependencies
 ├── README.md               ← this file
-└── data/                   ← dataset folder (35 xlsx files)
+└── data/                   ← dataset (35 Excel files)
     ├── avis_1_traduit.xlsx
     ├── avis_2_traduit.xlsx
     └── ... (up to avis_35_traduit.xlsx)
@@ -21,25 +57,36 @@ NLP_project/
 
 ---
 
-## How to Run (Step-by-Step)
+## How to Run — Option A: Clone from GitHub (Recommended)
 
-### Prerequisites
-- **Python 3.9 or higher** must be installed and available in your PATH.
-  Check by running: `python --version`
+```bash
+git clone https://github.com/chanumolulalith/NLP_PROJECT.git
+cd NLP_PROJECT
+pip install -r requirements.txt
+python -m streamlit run streamlit_app.py
+```
+
+The app opens automatically at **http://localhost:8501**
 
 ---
 
-### Step 1 – Open a terminal in the project folder
+## How to Run — Option B: From a downloaded folder
 
-Navigate to the project folder in your terminal / command prompt:
+### Step 1 — Open a terminal inside the project folder
 
+**Windows:**
 ```
-cd path\to\NLP_project
+cd C:\path\to\NLP_project
+```
+
+**macOS / Linux:**
+```bash
+cd /path/to/NLP_project
 ```
 
 ---
 
-### Step 2 – Create a virtual environment (recommended)
+### Step 2 — Create a virtual environment (recommended)
 
 **Windows:**
 ```
@@ -55,40 +102,69 @@ source .venv/bin/activate
 
 ---
 
-### Step 3 – Install dependencies
+### Step 3 — Install all dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-> This installs: `streamlit`, `pandas`, `numpy`, `matplotlib`, `scikit-learn`,
-> `openpyxl`, `gensim`, `textblob`, `transformers`, `tensorflow`, `sentencepiece`.
->
-> If any optional package fails to install (e.g. `tensorflow` on older hardware),
-> the app still runs — those features are gracefully skipped.
+> **Note:** If `tensorflow` fails to install (requires Python 3.9 – 3.12),
+> the app still runs completely — the Deep Learning tab will show a friendly
+> message and all other 5 tabs work normally.
 
 ---
 
-### Step 4 – Launch the app
+### Step 4 — Launch the app
 
 ```
 python -m streamlit run streamlit_app.py
 ```
 
 The browser opens automatically at **http://localhost:8501**
+If it does not open, copy and paste the URL manually.
 
-If the browser does not open automatically, paste the URL manually.
+---
+
+## App Tabs — What Each One Does
+
+| Tab | What you can do |
+|-----|----------------|
+| **Overview** | See dataset statistics (24k reviews, 56 insurers), view sample cleaned rows, try spell correction, download the cleaned dataset as CSV or Excel |
+| **Exploration & NLP tasks** | Generate n-gram frequency charts, run NMF topic modeling, train Word2Vec and explore the t-SNE word map, run zero-shot subject classification, generate insurer summaries |
+| **Supervised Models** | Train Logistic Regression or Naïve Bayes for star rating / sentiment / subject prediction; view confusion matrix, classification report, and misclassified examples |
+| **Prediction + Explanation** | Type any review and get instant predictions from all 3 models; see which words pushed the model toward or away from each prediction |
+| **Insurer Analysis + Retrieval** | Filter by insurer and rating; view ranking table and subject heatmap; search reviews by meaning; ask natural-language questions over retrieved results |
+| **Deep Learning** | Train a Keras embedding-layer model; view training loss curve; visualize the embedding space; export vectors for TensorBoard |
 
 ---
 
-## What Each Tab Does
+## Optional: TensorBoard
 
-| Tab | Content |
-|-----|---------|
-| **Overview** | Dataset statistics, sample cleaned rows, spelling-correction demo, download cleaned CSV/Excel |
-| **Exploration & NLP tasks** | N-gram frequency charts, topic modeling (NMF), Word2Vec embeddings + t-SNE, zero-shot classification, auto-generated insurer summaries |
-| **Supervised Models** | TF-IDF + Logistic Regression / Naïve Bayes for star rating, sentiment, and subject prediction; confusion matrices; error analysis; logistic explanation panel |
-| **Insurer Analytics** | Per-insurer statistics, subject breakdown heatmap, semantic search over reviews, retrieval-based QA |
-| **Deep Learning** | Keras embedding-layer text classifier (TensorFlow), training loss/accuracy curve, embedding-space visualization, TensorBoard export |
+After training a deep learning model inside the app and clicking
+**"Export embeddings for TensorBoard"**, run:
+
+```
+tensorboard --logdir "tensorboard_logs"
+```
+
+Then open **http://localhost:6006** in your browser.
 
 ---
+
+## Python Version Compatibility
+
+| Package | Requires | Status |
+|---------|----------|--------|
+| streamlit, pandas, scikit-learn | Python 3.8+ | Always works |
+| textblob, transformers | Python 3.8+ | Always works |
+| gensim | Python 3.8+ (needs C++ build tools) | sklearn fallback built-in |
+| tensorflow | Python 3.9 – 3.12 only | Deep learning tab skipped on 3.13+ |
+
+> The app was built and tested on **Python 3.14**. All features except
+> TensorFlow work out of the box.
+
+---
+
+## GitHub Repository
+
+[https://github.com/chanumolulalith/NLP_PROJECT](https://github.com/chanumolulalith/NLP_PROJECT)

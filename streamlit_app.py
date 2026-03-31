@@ -1645,7 +1645,26 @@ def plot_training_history(history_df: pd.DataFrame):
     return fig
 
 
+def _get_report_value(report: pd.DataFrame, row: str, col: str) -> Optional[float]:
+    """Safely extract a single float from a classification report DataFrame.
+
+    Returns None if the requested row/column does not exist or cannot be cast to float.
+    Used by build_model_summary_table to pull macro/weighted averages safely.
+    """
+    if row in report.index and col in report.columns:
+        try:
+            return float(report.loc[row, col])
+        except Exception:
+            return None
+    return None
+
+
 def build_model_summary_table(results: Dict[str, Dict[str, Any]]) -> pd.DataFrame:
+    """Build a one-row-per-model comparison table from a dict of training result bundles.
+
+    Extracts accuracy, macro and weighted precision/recall/F1, and error rate
+    so the Supervised Models tab can display a side-by-side leaderboard.
+    """
     rows = []
     for model_name, bundle in results.items():
         if not bundle:
@@ -1653,25 +1672,17 @@ def build_model_summary_table(results: Dict[str, Dict[str, Any]]) -> pd.DataFram
         report = bundle.get("report")
         if report is None or report.empty:
             continue
-        def _get(row: str, col: str) -> Optional[float]:
-            if row in report.index and col in report.columns:
-                try:
-                    return float(report.loc[row, col])
-                except Exception:
-                    return None
-            return None
-
         rows.append(
             {
-                "model": model_name,
-                "accuracy": float(bundle.get("accuracy", 0.0)),
-                "precision_macro": _get("macro avg", "precision"),
-                "recall_macro": _get("macro avg", "recall"),
-                "f1_macro": _get("macro avg", "f1-score"),
-                "precision_weighted": _get("weighted avg", "precision"),
-                "recall_weighted": _get("weighted avg", "recall"),
-                "f1_weighted": _get("weighted avg", "f1-score"),
-                "error_rate": float(bundle.get("error_rate", 0.0)),
+                "model":              model_name,
+                "accuracy":           float(bundle.get("accuracy", 0.0)),
+                "precision_macro":    _get_report_value(report, "macro avg",    "precision"),
+                "recall_macro":       _get_report_value(report, "macro avg",    "recall"),
+                "f1_macro":           _get_report_value(report, "macro avg",    "f1-score"),
+                "precision_weighted": _get_report_value(report, "weighted avg", "precision"),
+                "recall_weighted":    _get_report_value(report, "weighted avg", "recall"),
+                "f1_weighted":        _get_report_value(report, "weighted avg", "f1-score"),
+                "error_rate":         float(bundle.get("error_rate", 0.0)),
             }
         )
     return pd.DataFrame(rows)
